@@ -1,0 +1,43 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+.main {
+	margin: 50% auto;
+	transform: translate(0, -50%);
+	max-height: 640px;
+	height: 100%;
+	max-width: 420px;
+	width: 100%;
+	border-radius: 4px;
+	background-color: #DEDEDE;
+}
+.display {
+	padding: 12px;
+}
+.equation {
+	padding: 10px 0;
+	width: 100%;
+	font-size : 24px;
+	text-align: right;
+	border: 0px;
+	background-color: #DEDEDE;
+}
+.equation:focus, .equation:active {
+	outline: none;
+}
+.result {
+	padding: 0;
+	width: 100%;
+	font-size : 16px;
+	color: #555555;
+	text-align: right;
+	border: 0px;
+	background-color: #DEDEDE;
+}
+
+.button {
+	display: inline-block;
+	width: 25%;
+	font-size: 36px;
+}
