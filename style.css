@@ -12,11 +12,9 @@ body {
 	align-items: center;
 	max-width: 420px;
 	width: 100%;
+	padding: 12px;
 	border-radius: 4px;
 	background-color: #DEDEDE;
-}
-.display {
-	padding: 12px;
 }
 .equation {
 	padding: 10px 0;
@@ -24,7 +22,8 @@ body {
 	font-size : 24px;
 	text-align: right;
 	border: 0px;
-	background-color: #DEDEDE;
+	border-radius: 8px 8px 0 0;
+	background-color: white;
 }
 .equation:focus, .equation:active {
 	outline: none;
@@ -36,15 +35,19 @@ body {
 	color: #555555;
 	text-align: right;
 	border: 0px;
-	background-color: #DEDEDE;
+	background-color: white;
 }
 .button-group {
 	display: grid;
+	padding-top: 12px;
 	grid-template-columns: auto auto auto auto;
 	gap: 4px;
+	cursor: default;
 }
 .button {
 	padding: 20px 0;
 	text-align: center;
 	font-size: 36px;
+	color: white;
+	background-color: #333333;
 }
