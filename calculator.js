@@ -23,7 +23,6 @@ var eq = document.getElementsByClassName("equation")[0];
 var res = document.getElementsByClassName("result")[0];
 
 zero.onclick = function () {
-    //eq.value += "0";
-    //eq.focus();
-    
+    eq.value += "0";
+    eq.focus();
 }
