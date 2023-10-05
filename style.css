@@ -17,25 +17,25 @@ body {
 	background-color: #DEDEDE;
 }
 .equation {
-	padding: 10px 0;
-	width: 100%;
+	padding: 10px;
+	width: calc(100% - 20px);
 	font-size : 24px;
 	text-align: right;
 	border: 0px;
 	border-radius: 8px 8px 0 0;
-	background-color: white;
+	background-color: rgb(94, 207, 226);
 }
 .equation:focus, .equation:active {
 	outline: none;
 }
 .result {
-	padding: 0;
-	width: 100%;
+	padding: 2px 10px;
+	width: calc(100% - 20px);
 	font-size : 16px;
 	color: #555555;
 	text-align: right;
 	border: 0px;
-	background-color: white;
+	background-color: rgb(94, 207, 226);
 }
 .button-group {
 	display: grid;
@@ -43,6 +43,7 @@ body {
 	grid-template-columns: auto auto auto auto;
 	gap: 4px;
 	cursor: default;
+	user-select: none;
 }
 .button {
 	padding: 20px 0;
