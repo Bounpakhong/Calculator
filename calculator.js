@@ -13,7 +13,7 @@ var plus = document.getElementById("plus");
 var minus = document.getElementById("minus");
 var times = document.getElementById("times");
 var div = document.getElementById("div");
-var equato = document.getElementById("equato");
+var equal = document.getElementById("equal");
 var point = document.getElementById("point");
 var bracket = document.getElementById("bracket");
 var percent = document.getElementById("percent");
@@ -37,11 +37,17 @@ six.onclick = () => numbers("6");
 seven.onclick = () => numbers("7");
 eight.onclick = () => numbers("8");
 nine.onclick = () => numbers("9");
-point.onclick = () => operator(".");
+point.onclick = () => pointing();
 plus.onclick = () => operator("+");
 minus.onclick = () => operator("-");
 times.onclick = () => operator("*");
 div.onclick = () => operator("/");
+//#endregion
+
+//#region equation update
+function update() {
+    res.innerHTML = eval(eq.value);
+}
 //#endregion
 
 //#region buttons' function
@@ -52,24 +58,20 @@ function numbers(n) {
         eq.value += n;
     }
     eq.focus();
+    update();
+}
+function pointing() {
+
 }
 function operator(o) {
-    let end = eq.value.length - 1;
-    if (o != ".") {
-        if (/[+\-*/.]/.test(eq.value[end])) {
-            eq.value = eq.value.slice(0, end) + o;
-        } else if (eq.value == "" || eq.value == "0") {
-            eq.value = "0" + o;
+    let eqval = eq.value;
+    let eqend = eqval.length - 1;
+    let eqlast = eqval[eqend];
+    if (eqval != "") {
+        if (/[+\-*/.]/.test(eqlast)) {
+            eq.value = eqval.slice(0, eqend) + o;
         } else {
             eq.value += o;
-        }
-    } else {
-        if (/[+\-*/.]/.test(eq.value[end])) {
-            eq.value = eq.value.slice(0, end) + o;
-        } else if(eq.value == "0" || eq.value == "") {
-            eq.value = "0.";
-        } else {
-            eq.value += ".";
         }
     }
 }
