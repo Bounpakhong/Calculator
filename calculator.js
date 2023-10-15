@@ -46,6 +46,14 @@ cls.onclick = () => clear();
 bs.onclick = () => backspace();
 //#endregion
 
+//#region get position of blink cursor
+var theBlink = 0;
+document.addEventListener("mouseup", function(){
+    eq.focus();
+    theBlink = eq.selectionEnd;
+  });
+//#endregion
+
 //#region equation update
 function update(val) {
     if (val) {
@@ -53,10 +61,6 @@ function update(val) {
     }
     res.innerHTML = (res.innerHTML!="")?eval(eq.value):"0";
 }
-//#endregion
-
-//#region get position of blink cursor
-
 //#endregion
 
 //#region allow inputting
@@ -76,7 +80,7 @@ document.addEventListener('keyup', function(event) {
 
 //#region buttons' function
 function numbers(n) {
-    if (eq.value == "0") {``
+    if (eq.value == "0") {
         eq.value = n;
     } else {
         eq.value += n;
@@ -89,13 +93,15 @@ function pointing(d) {
     let eqend = eqval.length - 1;
     let eqlast = eqval[eqend];
     if (eqval != "") {
-        if (/[+\-*/.]/.test(eqlast)) {
-            eq.value = eqval.slice(0, eqend) + d;
-        } else {
-        let eqarr = eqval.split(/[+\-*/]/);
-            if (!eqarr[eqarr.length - 1].includes(".")) {
-                eq.value += d;
-            }
+        if (eqlast != ".") {
+            if (/[+\-*/]/.test(eqlast)) {
+                eq.value = eqval.slice(0, eqend) + d;
+            } else {
+            let eqarr = eqval.split(/[+\-*/]/);
+                if (!eqarr[eqarr.length - 1].includes(".")) {
+                    eq.value += d;
+                }
+            }    
         }
     } else {
         eq.value = "0."
