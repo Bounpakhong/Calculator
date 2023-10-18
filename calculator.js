@@ -46,12 +46,26 @@ cls.onclick = () => clear();
 bs.onclick = () => backspace();
 //#endregion
 
+//#region string prototype splice()
+String.prototype.splice = function (index, count, add) {
+    if (index < 0) {
+        index = this.length + index;
+        if (index < 0) {
+            index = 0;
+        }
+    }
+
+    return this.slice(0, index) + (add || "") + this.slice(index + count);
+};
+//#endregion
+
 //#region get position of blink cursor
-var theBlink = 0;
-document.addEventListener("mouseup", function(){
+var blinkPos = 0;
+document.addEventListener("mouseup", function () {
     eq.focus();
-    theBlink = eq.selectionEnd;
-  });
+    blinkPos = eq.selectionEnd;
+    //console.log(blinkPos);
+});
 //#endregion
 
 //#region equation update
@@ -59,23 +73,26 @@ function update(val) {
     if (val) {
         return res.innerHTML = eval((val));
     }
-    res.innerHTML = (res.innerHTML!="")?eval(eq.value):"0";
+    //console.log(eq.value);
+    res.innerHTML = (res.innerHTML != "") ? eval(eq.value) : "0";
 }
 //#endregion
 
 //#region allow inputting
-eq.addEventListener("keypress", function(event) {
-    event.preventDefault();
+eq.addEventListener("keypress", function (event) {
+    if (!/\d/.test(event.key)) {
+        event.preventDefault();
+    }
 })
-document.addEventListener('keyup', function(event) {
-    if (/\d/.test(event.key)) {
-      numbers(event.key);
-    } else if (/\+|\-|\*|\/|\%/.test(event.key)) {
+document.addEventListener('keyup', function (event) {
+    if (/\+|\-|\*|\/|\%/.test(event.key)) {
         operator(event.key);
     } else if (/\./.test(event.key)) {
         pointing(event.key);
+    } else {
+        update();
     }
-  });
+});
 //#endregion
 
 //#region buttons' function
@@ -83,25 +100,17 @@ function numbers(n) {
     if (eq.value == "0") {
         eq.value = n;
     } else {
-        eq.value += n;
+        eq.value = eq.value.splice(blinkPos, 0, n);
     }
     eq.focus();
+    eq.setSelectionRange(blinkPos + 1, blinkPos + 1);
     update();
 }
 function pointing(d) {
     let eqval = eq.value;
-    let eqend = eqval.length - 1;
-    let eqlast = eqval[eqend];
     if (eqval != "") {
-        if (eqlast != ".") {
-            if (/[+\-*/]/.test(eqlast)) {
-                eq.value = eqval.slice(0, eqend) + d;
-            } else {
-            let eqarr = eqval.split(/[+\-*/]/);
-                if (!eqarr[eqarr.length - 1].includes(".")) {
-                    eq.value += d;
-                }
-            }    
+        if (blinkPos == eqval.length) {
+            
         }
     } else {
         eq.value = "0."
