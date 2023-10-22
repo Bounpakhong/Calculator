@@ -64,8 +64,11 @@ var blinkPos = 0;
 document.addEventListener("mouseup", function () {
     eq.focus();
     blinkPos = eq.selectionEnd;
-    //console.log(blinkPos);
 });
+document.addEventListener("keyup", function() {
+    blinkPos = eq.selectionEnd;
+    console.log(blinkPos);
+})
 //#endregion
 
 //#region equation update
@@ -110,7 +113,10 @@ function pointing(d) {
     let eqval = eq.value;
     if (eqval != "") {
         if (blinkPos == eqval.length) {
-            
+        let arr = eqval.split(/[+\-*/]/);
+        if (!arr[arr.length - 1].includes(".")) {
+
+        }
         }
     } else {
         eq.value = "0."
